@@ -61,14 +61,14 @@ class listener implements EventSubscriberInterface
 			{
 				$sql_update_posts = 'UPDATE ' . POSTS_TABLE . '
 					SET post_time = ' . time() . '
-					WHERE post_id = ' . $event['data']['post_id'] . ' 
+					WHERE post_id = ' . $event['data']['post_id'] . '
 						AND topic_id = ' . $event['data']['topic_id'];
 				$this->db->sql_query($sql_update_posts);
 
-				$sql_update_topics = 'UPDATE ' . TOPICS_TABLE . ' 
-					SET topic_last_post_time = ' . time() . ' 
+				$sql_update_topics = 'UPDATE ' . TOPICS_TABLE . '
+					SET topic_last_post_time = ' . time() . '
 					WHERE topic_id = ' . $event['data']['topic_id'];
-				$this->db->sql_query($sql_update_topics);         
+				$this->db->sql_query($sql_update_topics);
 
 				if(!function_exists('markread'))
 				{
