@@ -1,0 +1,9 @@
+services:
+    phpbbmodders.editedposts_unread.listener:
+        class: phpbbmodders\editedposts_unread\event\listener
+        arguments:
+            - @dbal.conn		
+            - %core.root_path%
+            - %core.php_ext%
+        tags:
+            - { name: event.listener }

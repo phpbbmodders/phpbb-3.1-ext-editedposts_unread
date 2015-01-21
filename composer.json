@@ -1,0 +1,31 @@
+{
+	"name": "phpbbmodders/editedposts_unread",
+	"type": "phpbb-extension",
+	"description": "Will mark posts as unread if edited",
+	"homepage": "https://github.com/phpbbmodders/editedposts_unread",
+	"version": "1.0.0",
+	"time": "2014-10-28",
+	"keywords": ["phpbb", "extension", "mark edited posts unread"],
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "Rich McGirr",
+			"homepage": "http://phpbbmodders.net",
+			"email": "rmcgirr83@phpbbmodders.net",
+			"role": "Lead Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3",
+		"composer/installers": "~1.0"
+	},
+	"require-dev": {
+		"phpbb/epv": "dev-master"
+	},
+	"extra": {
+		"display-name": "Mark Edited Posts Unread",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.1.0-RC2,<3.2.*@dev"
+		}
+	}
+}
