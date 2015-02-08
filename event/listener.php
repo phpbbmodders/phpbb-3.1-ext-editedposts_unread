@@ -41,23 +41,23 @@ class listener implements EventSubscriberInterface
 
 	public function submit_post_end($event)
 	{
-		if($event['mode'] == 'edit')
+		if ($event['mode'] == 'edit')
 		{
 			// we need to ensure that what we are resetting is appropriate
 			// do we care about when someone edits the first post of a topic?
 			// $event['data']['topic_first_post_id'] == $event['data']['post_id'] $post_mode = 'edit_first_post'
 
 			$ext_post_mode = '';
-			if($event['data']['topic_posts_approved'] + $event['data']['topic_posts_unapproved'] + $event['data']['topic_posts_softdeleted'] == 1)
+			if ($event['data']['topic_posts_approved'] + $event['data']['topic_posts_unapproved'] + $event['data']['topic_posts_softdeleted'] == 1)
 			{
 				$ext_post_mode = 'edit_topic';
 			}
-			else if($event['data']['topic_last_post_id'] == $event['data']['post_id'])
+			else if ($event['data']['topic_last_post_id'] == $event['data']['post_id'])
 			{
 				$ext_post_mode = 'edit_last_post';
 			}
 
-			if($ext_post_mode == 'edit_last_post' || $ext_post_mode == 'edit_topic')
+			if ($ext_post_mode == 'edit_last_post' || $ext_post_mode == 'edit_topic')
 			{
 				$sql_update_posts = 'UPDATE ' . POSTS_TABLE . '
 					SET post_time = ' . time() . '
@@ -70,7 +70,7 @@ class listener implements EventSubscriberInterface
 					WHERE topic_id = ' . $event['data']['topic_id'];
 				$this->db->sql_query($sql_update_topics);
 
-				if(!function_exists('markread'))
+				if (!function_exists('markread'))
 				{
 					include ($this->phpbb_root_path . 'includes/functions_posting.' . $this->phpEx);
 				}
