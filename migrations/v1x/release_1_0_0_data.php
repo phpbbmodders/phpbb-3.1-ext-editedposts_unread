@@ -1,11 +1,13 @@
 <?php
 /**
-*
-* @package Mark Edited Posts Unread
-* @copyright (c) 2014 RMcGirr83
-* @license http://opensource.org/licenses/gpl-2.0.php GNU General Public License v2
-*
-*/
+ *
+ * Mark Edited Posts Unread extension for the phpBB Forum Software package
+ *
+ * @copyright (c) 2014 RMcGirr83
+ * @copyright (c) 2026, phpBB Modders, https://www.phpbbmodders.com/
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ */
 
 namespace phpbbmodders\editedposts_unread\migrations\v1x;
 
