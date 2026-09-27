@@ -24,3 +24,5 @@ This extension was renamed from `editedposts_unread` to `editedpostsunread` to m
 2. Delete the `/ext/phpbbmodders/editedposts_unread` folder.
 3. Upload this version to `/ext/phpbbmodders/editedpostsunread` and enable it. The old install's migration history is moved to the new name automatically.
 4. Purge the board cache.
+
+If you disable the old extension from the command line (`bin/phpbbcli.php`) instead of the ACP, run `bin/phpbbcli.php cache:purge` before enabling the new one; the command-line disable doesn't clear the cache.
