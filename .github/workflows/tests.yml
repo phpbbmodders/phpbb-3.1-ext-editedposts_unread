@@ -1,0 +1,50 @@
+name: Tests
+
+# For most extensions, this workflow should not need changing;
+# simply commit it to your repository.
+#
+# See the README for full details and configuration instructions:
+#  - https://github.com/phpbb-extensions/test-framework
+#
+on:
+  push:
+    # Run tests when commits are pushed to these branches in your repo,
+    # or remove this branches section to run tests on all your branches
+    branches:
+      - master
+
+  pull_request:
+    # Run tests when pull requests are made on these branches in your repo,
+    # or remove this branches section to run tests on all your branches
+    branches:
+      - master
+
+jobs:
+  call-tests:
+    name: Extension tests
+      # Set the phpBB branch to test your extension with after the @ symbol
+      # - 3.3.x: Targets the phpBB 3.3.x release line
+      # - master: Targets the latest development version of phpBB (master branch)
+    uses: phpbb-extensions/test-framework/.github/workflows/tests.yml@3.3.x
+    with:
+      # Your extension vendor/package name
+      EXTNAME: phpbbmodders/editedpostsunread
+
+      # Run MySQL/MariaDB tests?
+      RUN_MYSQL_JOBS: 0
+
+      # Run PostgreSQL tests?
+      RUN_PGSQL_JOBS: 0
+
+      # Run MSSQL and SQLite3 tests?
+      RUN_MSSQL_JOBS: 0
+
+      # Run Windows IIS & PostgreSQL tests?
+      RUN_WINDOWS_JOBS: 0
+
+      # Preferred PHP version used for all test jobs.
+      PRIMARY_PHP_VERSION: '8.2'
+
+      # The MySQL and PostgreSQL jobs run tests across multiple PHP versions.
+      # List the PHP versions you want your extension tested with.
+      PHP_VERSION_MATRIX: '["8.2", "8.3", "8.4"]'
