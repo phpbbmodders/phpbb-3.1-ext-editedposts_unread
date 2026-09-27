@@ -9,7 +9,7 @@
  *
  */
 
-namespace phpbbmodders\editedposts_unread\migrations\v1x;
+namespace phpbbmodders\editedpostsunread\migrations\v1x;
 
 class release_1_0_0_data extends \phpbb\db\migration\migration
 {
