@@ -9,7 +9,7 @@
  *
  */
 
-namespace phpbbmodders\editedposts_unread\event;
+namespace phpbbmodders\editedpostsunread\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

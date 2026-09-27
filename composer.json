@@ -1,5 +1,5 @@
 {
-	"name": "phpbbmodders/editedposts_unread",
+	"name": "phpbbmodders/editedpostsunread",
 	"type": "phpbb-extension",
 	"description": "Will mark posts as unread if edited",
 	"homepage": "https://www.phpbbmodders.com/",
