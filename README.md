@@ -3,9 +3,6 @@ phpbb-3.1-ext-editedposts_unread
 
 This extension marks topic's last posts and first post as unread if they are edited.
 
-
-
-[![Build Status](https://travis-ci.org/phpbbmodders/editedposts_unread.svg)](https://travis-ci.org/phpbbmodders/editedposts_unread)
 ## Installation
 
 ### 1. clone
