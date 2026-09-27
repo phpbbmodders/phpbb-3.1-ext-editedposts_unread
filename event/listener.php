@@ -18,7 +18,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 */
 class listener implements EventSubscriberInterface
 {
-	/** @var \phpbb\db\driver\driver */
+	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
 	/** @var string phpBB root path */
@@ -30,7 +30,7 @@ class listener implements EventSubscriberInterface
 	public function __construct(\phpbb\db\driver\driver_interface $db, $phpbb_root_path, $php_ext)
 	{
 		$this->db = $db;
-		$this->root_path = $phpbb_root_path;
+		$this->phpbb_root_path = $phpbb_root_path;
 		$this->php_ext = $php_ext;
 	}
 
@@ -63,18 +63,18 @@ class listener implements EventSubscriberInterface
 			{
 				$sql_update_posts = 'UPDATE ' . POSTS_TABLE . '
 					SET post_time = ' . time() . '
-					WHERE post_id = ' . $event['data']['post_id'] . '
-						AND topic_id = ' . $event['data']['topic_id'];
+					WHERE post_id = ' . (int) $event['data']['post_id'] . '
+						AND topic_id = ' . (int) $event['data']['topic_id'];
 				$this->db->sql_query($sql_update_posts);
 
 				$sql_update_topics = 'UPDATE ' . TOPICS_TABLE . '
 					SET topic_last_post_time = ' . time() . '
-					WHERE topic_id = ' . $event['data']['topic_id'];
+					WHERE topic_id = ' . (int) $event['data']['topic_id'];
 				$this->db->sql_query($sql_update_topics);
 
-				if (!function_exists('markread'))
+				if (!function_exists('update_post_information'))
 				{
-					include ($this->phpbb_root_path . 'includes/functions_posting.' . $this->phpEx);
+					include ($this->phpbb_root_path . 'includes/functions_posting.' . $this->php_ext);
 				}
 
 				update_post_information('forum', $event['data']['forum_id']);
