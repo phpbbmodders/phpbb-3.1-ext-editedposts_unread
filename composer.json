@@ -1,7 +1,7 @@
 {
 	"name": "phpbbmodders/editedpostsunread",
 	"type": "phpbb-extension",
-	"description": "Will mark posts as unread if edited",
+	"description": "Marks a topic unread again when its last post is edited.",
 	"homepage": "https://www.phpbbmodders.com/",
 	"version": "1.0.0",
 	"time": "2014-10-28",
