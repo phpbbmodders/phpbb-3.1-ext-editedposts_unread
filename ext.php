@@ -52,7 +52,10 @@ class ext extends \phpbb\extension\base
 
 		if ($this->container->get('ext.manager')->is_enabled(self::OLD_EXT_NAME))
 		{
-			return ['Disable the old "' . self::OLD_EXT_NAME . '" extension first (keep its data, do not delete it).'];
+			$language = $this->container->get('language');
+			$language->add_lang('install_editedpostsunread', 'phpbbmodders/editedpostsunread');
+
+			return $language->lang('EDITEDPOSTSUNREAD_DISABLE_OLD', self::OLD_EXT_NAME);
 		}
 
 		return true;
@@ -119,16 +122,20 @@ class ext extends \phpbb\extension\base
 
 		foreach ($rows as $row)
 		{
-			if ($this->new_class_name($row['migration_name']) === $row['migration_name'])
+			// Other extensions' migrations may depend on ours, so their
+			// dependency lists are rewritten too, not just our own rows
+			$old_depends_on = unserialize($row['migration_depends_on'], ['allowed_classes' => false]);
+			$old_depends_on = is_array($old_depends_on) ? $old_depends_on : [];
+			$depends_on = array_map([$this, 'new_class_name'], $old_depends_on);
+			$name = $this->new_class_name($row['migration_name']);
+
+			if ($name === $row['migration_name'] && $depends_on === $old_depends_on)
 			{
 				continue;
 			}
 
-			$depends_on = unserialize($row['migration_depends_on'], ['allowed_classes' => false]);
-			$depends_on = is_array($depends_on) ? array_map([$this, 'new_class_name'], $depends_on) : [];
-
 			$db->sql_query('UPDATE ' . $prefix . 'migrations SET ' . $db->sql_build_array('UPDATE', [
-				'migration_name'		=> $this->new_class_name($row['migration_name']),
+				'migration_name'		=> $name,
 				'migration_depends_on'	=> serialize($depends_on),
 			]) . " WHERE migration_name = '" . $db->sql_escape($row['migration_name']) . "'");
 		}
